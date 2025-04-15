@@ -26,31 +26,15 @@ message ProductList {
     google.protobuf.Timestamp added_date = 6;
 }
 
-  
 message Roles {
     string roleId =1;
     string roleName =2;
-}
-
-message EmptyRequest{
-
-}
-
-message EmptyResponse{
-
-}
-
-message UserRequest{
-    User user = 1;
 }
 
 message UserResponse{
     User user = 1;
 }
 
-message UserListResponse{
-    repeated User user = 1;
-}
 
 message UserIdRequest{
     string userId = 1;
@@ -60,21 +44,7 @@ message UserEmailRequest{
     string userEmail = 1;
 }
 
-message UpdateUserRequest {
-    string user_id = 1;
-    User user = 2;
-}
-
 service UserServiceGrpc{
-    rpc createUser(UserRequest) returns (UserResponse);
-
-    rpc updateUser(UpdateUserRequest) returns (UserResponse);
-
-    rpc deleteUser(UserIdRequest) returns (EmptyResponse);
-
-    rpc getAllUser(EmptyRequest) returns (UserListResponse);
-
     rpc getSingleUser(UserIdRequest) returns (UserResponse);
-
     rpc getUserByEmail(UserEmailRequest) returns (UserResponse);
 }
