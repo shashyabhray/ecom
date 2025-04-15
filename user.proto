@@ -1,0 +1,80 @@
+
+syntax = "proto3";
+option java_multiple_files = true;
+package com.ecom.user.proto;
+option java_package = "com.ecom.user.protobuff";
+option java_outer_classname = "ecomProto";
+import "google/protobuf/timestamp.proto";
+
+message User{
+    string userId = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string gender = 5;
+    string about = 6;
+    repeated ProductList productlist = 7;
+    repeated Roles roles = 8;
+}
+
+message ProductList {
+    string product_id = 1;
+    string title = 2;
+    string description = 3;
+    int32 price = 4;
+    int32 quantity = 5;
+    google.protobuf.Timestamp added_date = 6;
+}
+
+  
+message Roles {
+    string roleId =1;
+    string roleName =2;
+}
+
+message EmptyRequest{
+
+}
+
+message EmptyResponse{
+
+}
+
+message UserRequest{
+    User user = 1;
+}
+
+message UserResponse{
+    User user = 1;
+}
+
+message UserListResponse{
+    repeated User user = 1;
+}
+
+message UserIdRequest{
+    string userId = 1;
+}
+
+message UserEmailRequest{
+    string userEmail = 1;
+}
+
+message UpdateUserRequest {
+    string user_id = 1;
+    User user = 2;
+}
+
+service UserServiceGrpc{
+    rpc createUser(UserRequest) returns (UserResponse);
+
+    rpc updateUser(UpdateUserRequest) returns (UserResponse);
+
+    rpc deleteUser(UserIdRequest) returns (EmptyResponse);
+
+    rpc getAllUser(EmptyRequest) returns (UserListResponse);
+
+    rpc getSingleUser(UserIdRequest) returns (UserResponse);
+
+    rpc getUserByEmail(UserEmailRequest) returns (UserResponse);
+}
